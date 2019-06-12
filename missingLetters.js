@@ -7,9 +7,6 @@
 // Remember to use Read-Search-Ask if you get stuck. Try to pair 
 // program. Write your own code.
 
-
-
-
 function fearNotLetter(str) {
   const alph = 'abcdefghijklmnopqrstuvwxyz'.split('');
   str = str.split("");
