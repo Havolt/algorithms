@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <div></div>
+
+
+    <script>
+
+    //Have to get pivot
+    //Need to split array in half with pivot
+    //When array is split into sub need to sort sub arrays
+    //When sub arrays arr sorted need to split them if possible
+    
+    function quickSort(arr) {
+        // change code below this line
+
+        function getPivot(pivArr) {
+            const tmpArr = [pivArr[0], pivArr[Math.floor(pivArr.length/2)], pivArr[pivArr.length-1]];
+
+            for(let i = 0; i < 2; i++) {
+                if(tmpArr[i] > tmpArr[i+1]) {
+                    tmpArr[i] = tmpArr[i] + tmpArr[i+1];
+                    tmpArr[i+1] = tmpArr[i] - tmpArr[i+1];
+                    tmpArr[i] = tmpArr[i] - tmpArr[i+1];
+                }
+            }
+            return tmpArr[1];
+        }
+        
+        function subSort(subArr, num) {
+            const subA = [];
+            const subB = [];
+            for(let i = 0; i < subArr.length; i++) {
+                if(subArr[i] <= num) {
+                    subA.push(subArr[i]);
+                } else {
+                    subB.push(subArr[i]);
+                }
+            }
+            if(subArr.length > 2) {
+                return subSort(arr, getPivot(arr));
+            } else {
+                return [...subA, ...subB];
+            }
+            
+        }
+
+
+
+        console.log(subSort(arr, getPivot(arr) ));
+        // change code above this line
+        return arr;
+    }
+
+    // test array:
+    const testArr = [1, 4, 2, 8, 345, 123, 43, 32, 5643, 63, 123, 43, 2, 55, 1, 234, 92]
+    quickSort(testArr);
+    </script>
+    
+</body>
+</html>
