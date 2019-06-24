@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+        
+        var longestPalindrome = function(s) {
+    
+            s = s.split('');
+            let longPalin = [];
+
+            if(s.length == 1) {
+                return s[0];
+            } else if(s.length == 0) {
+                return "";
+            }
+
+            function checkPalin(first, last) {
+                let arr1 = [];
+                let arr2 = [];
+                for(let i = first; i < (last+first)/2; i++) {
+                    arr1.push(s[i]);
+                }
+                for(let i = last; i >= (last+first)/2; i--) {
+                    arr2.push(s[i]);
+                }
+                for(let i = 0; i < arr1.length; i++) {
+                    if(arr1[i] != arr2[i]) {
+                        return false;
+                    }
+                }
+                
+                if((arr1.length+arr2.length) > longPalin.length) {
+                    longPalin = [...arr1, ...arr2.reverse()];
+                }
+                return true;
+            }
+ 
+            for(let i = 0; i < s.length; i++) {
+                for(let j = s.length-1; j > i; j--) {
+                    if(s[i] == s[j] && (j-i) > longPalin.length) {
+                        if(checkPalin(i, j)) {
+                            break;
+                        }
+                    }
+                }
+            }
+            if(longPalin.length < 1) {
+                return s[0];
+            }
+            return longPalin.join("");
+        };
+
+
+        console.log(longestPalindrome("kyyrjtdplseovzwjkykrjwhxquwxsfsorjiumvxjhjmgeueafubtonhlerrgsgohfosqssmizcuqryqomsipovhhodpfyudtusjhonlqabhxfahfcjqxyckycstcqwxvicwkjeuboerkmjshfgiglceycmycadpnvoeaurqatesivajoqdilynbcihnidbizwkuaoegmytopzdmvvoewvhebqzskseeubnretjgnmyjwwgcooytfojeuzcuyhsznbcaiqpwcyusyyywqmmvqzvvceylnuwcbxybhqpvjumzomnabrjgcfaabqmiotlfojnyuolostmtacbwmwlqdfkbfikusuqtupdwdrjwqmuudbcvtpieiwteqbeyfyqejglmxofdjksqmzeugwvuniaxdrunyunnqpbnfbgqemvamaxuhjbyzqmhalrprhnindrkbopwbwsjeqrmyqipnqvjqzpjalqyfvaavyhytetllzupxjwozdfpmjhjlrnitnjgapzrakcqahaqetwllaaiadalmxgvpawqpgecojxfvcgxsbrldktufdrogkogbltcezflyctklpqrjymqzyzmtlssnavzcquytcskcnjzzrytsvawkavzboncxlhqfiofuohehaygxidxsofhmhzygklliovnwqbwwiiyarxtoihvjkdrzqsnmhdtdlpckuayhtfyirnhkrhbrwkdymjrjklonyggqnxhfvtkqxoicakzsxmgczpwhpkzcntkcwhkdkxvfnjbvjjoumczjyvdgkfukfuldolqnauvoyhoheoqvpwoisniv"));
+        
+    </script>
+
+</body>
+</html>
