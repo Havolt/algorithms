@@ -50,25 +50,37 @@
                            return i;
                        }
                        else if( (i - pos) == 2 || (i - pos + 1) % 2 != 0) {
-                           console.log((i - pos), i, pos)
-                           console.log('there')
                            return undefined;
                        }
                        else {
-                           console.log('here');
-                            return findInside(i, pos+1);
+                            return findInside(i, pos+1, i-1);
                        }
                    }
                }
            }
 
            function getParType(pos) {
-            
+                for(let i = 0; i < parTypes.length; i++) {
+                    if(s[pos] == parTypes[i][0]) {
+                        return parTypes[i][1];
+                    }
+                }
            }
 
            function findInside(finalPos, start, end) {
-               getParType(start);
+               const lastLetter = getParType(start);
+               if(lastLetter == s[end]) {
+                   if(end - start == 1) {
+                       return finalPos;
+                   } else {
+                       return findInside(finalPos, start+1, end-1);
+                   }
+               } else {
+                   return undefined;
+               }
            }
+
+           return true;
             
 
         };
