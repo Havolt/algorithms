@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+
+
+    <script>
+        
+        var threeSum = function(nums) {
+
+            if(nums.length < 3) { return [] }
+            const endArr = [];
+
+            for(let i = 0; i < nums.length; i++) {
+                for(let j = i+1; j < nums.length; j++) {
+                    for(let k = j+1; k < nums.length; k++) {
+                        if(nums[i] + nums[j] + nums[k] == 0) {
+                            endArr.push([nums[i], nums[j], nums[k]].sort((a, b) => a - b));
+                        }
+                    }
+                }
+            }
+
+            for(let i = 0; i < endArr.length; i++) {
+                for(let j = i+1; j < endArr.length; j++) {
+                    if(endArr[i][0] == endArr[j][0] &&
+                    endArr[i][1] == endArr[j][1] &&
+                    endArr[i][2] == endArr[j][2]) {
+                        endArr.splice(i, 1);
+                        i--;
+                        j = i+1;
+                        break;
+                    }
+                }
+            }
+            
+            return endArr;
+        };
+
+
+        console.log(threeSum([-1, 0, 1, 2, -1, -4, -4, 2, 8, -8, 3, -3, 10, -5, -7, 12]));
+        
+    
+    </script>
+    
+</body>
+</html>

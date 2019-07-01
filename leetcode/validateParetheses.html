@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <div id="app"></div>
+
+
+    <script>
+
+        var isValid = function(s) {
+
+            const parTypes = [
+                ["(", ")"],
+                ["[", "]"],
+                ["{", "}"]
+            ];
+
+            if(s.length == 1 || s.length % 2 != 0 || s[0] == parTypes[0][1] ||
+            s[0] == parTypes[1][1] || s[0] == parTypes[2][1] ) {
+                return false;
+            }
+            
+            
+
+           for(let i = 0; i < s.length; i++) {
+               for(let j = 0; j < parTypes.length; j++) {
+                   if(s[i] == parTypes[j][0]) {
+                    const nextMove = findMatch(i, parTypes[j][1]);
+                    if(nextMove) {
+                        i = nextMove;
+                        j = 0;
+                    } else {
+                        return false;
+                    }
+                   }
+               }
+           }
+
+           function findMatch(pos, parType) {
+               for(let i = pos+1; i < s.length; i++) {
+                   if(s[i] == parType) {
+                       if(i - pos == 1) {
+                           return i;
+                       }
+                       else if( (i - pos) == 2 || (i - pos + 1) % 2 != 0) {
+                           console.log((i - pos), i, pos)
+                           console.log('there')
+                           return undefined;
+                       }
+                       else {
+                           console.log('here');
+                            return findInside(i, pos+1);
+                       }
+                   }
+               }
+           }
+
+           function getParType(pos) {
+            
+           }
+
+           function findInside(finalPos, start, end) {
+               getParType(start);
+           }
+            
+
+        };
+
+
+        console.log(isValid("()"));
+        console.log(isValid("()[]{}"));
+        console.log(isValid("(]"));
+        console.log(isValid("([)]"));
+        console.log(isValid("{[()]}"));
+    
+    </script>
+
+</body>
+</html>
